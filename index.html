@@ -116,7 +116,16 @@ footer{text-align:center;color:var(--mute);font-size:14px;padding:10px 20px 40px
     <p class="small">October 19, 2026 · our first month</p>
     <a class="btn" href="#pieces">start scrolling</a>
   </header>
-
+  <section class="wrap" id="song" style="padding-bottom:0">
+    <div class="head"><h2>our song</h2><p>Press play before you scroll, bab. This one reminds me of us.</p></div>
+    <div style="max-width:440px;margin:auto">
+      <iframe src="https://open.spotify.com/embed/track/1LzNfuep1bnAUR9skqdHCK?utm_source=generator&theme=0"
+        width="100%" height="152" style="border:0;border-radius:12px"
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+        loading="lazy" title="Fade Into You by Mazzy Star"></iframe>
+    </div>
+  </section>
+  
   <section class="wrap" id="pieces">
     <div class="head">
       <h2>pieces of us</h2>
@@ -129,7 +138,16 @@ footer{text-align:center;color:var(--mute);font-size:14px;padding:10px 20px 40px
       <p class="small">Photos and captions you add are saved on this device only.</p>
     </div>
   </section>
-
+  <section class="wrap" id="video">
+    <div class="head"><h2>a little moving memory</h2></div>
+    <div class="panel" style="margin:auto;text-align:center">
+      <video controls playsinline preload="metadata" style="width:100%;max-height:70vh">
+        <source src="video1.mp4" type="video/mp4">
+      </video>
+      <p class="small" style="margin:10px 0 0">caption here</p>
+    </div>
+  </section>
+  
   <section class="wrap" id="story">
     <div class="head"><h2>our little timeline</h2></div>
     <div class="quests">
@@ -204,7 +222,15 @@ const PHOTOS = [                 // [file name, caption]. Add Genshin screenshot
   ["photo12.jpg", "one of my fave photoboothh"],
   ["photo13.jpg", "besttttt date ket bitin sa oras"],
   ["photo14.jpg", "ganda"],
-  ["photo15.jpg", "hisdol"]
+  ["photo15.jpg", "hisdol"],
+  ["genshin1.jpg", "caption here"],
+  ["genshin2.jpg", "caption here"],
+  ["genshin3.jpg", "caption here"],
+  ["genshin4.jpg", "caption here"],
+  ["genshin5.jpg", "caption here"],
+  ["genshin6.jpg", "caption here"],
+  ["genshin7.jpg", "caption here"],
+  ["genshin8.jpg", "caption here"]
 ];
 const WRONG = [                  // what shows when he gets the PIN wrong
   "salaaaaaa. Wrong PIN.",
