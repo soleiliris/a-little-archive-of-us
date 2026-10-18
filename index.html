@@ -1,0 +1,667 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f4eddf">
+  <title>A Little Archive of Us ♡</title>
+
+  <style>
+    :root {
+      --paper: #f7f1e6;
+      --cream: #fffaf1;
+      --ink: #493c32;
+      --muted: #8c7969;
+      --blue: #a9bbc7;
+      --yellow: #e6cb76;
+      --line: #d8c9b5;
+      --white: #fffdf8;
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 20px;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(ellipse at 10% 5%, #eadfca 0, transparent 38%),
+        var(--paper);
+      font-family: Georgia, "Times New Roman", serif;
+      line-height: 1.7;
+    }
+
+    button, audio { font: inherit; }
+
+    button { cursor: pointer; }
+
+    button:focus-visible, a:focus-visible {
+      outline: 3px solid #6c899b;
+      outline-offset: 4px;
+    }
+
+    .top-note {
+      padding: 10px 16px;
+      text-align: center;
+      background: #e5d9c7;
+      color: #6b5848;
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .hero {
+      min-height: 92vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 55px 22px 70px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .eyebrow {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: var(--muted);
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+
+    h1 {
+      font-size: clamp(43px, 9vw, 76px);
+      line-height: 1.05;
+      font-weight: normal;
+      font-style: italic;
+      max-width: 720px;
+      margin: 18px 0;
+    }
+
+    .hero-subtitle {
+      max-width: 390px;
+      color: var(--muted);
+      margin-bottom: 28px;
+    }
+
+    .sunflower {
+      font-size: 35px;
+      color: #b89a42;
+      margin: 12px 0;
+    }
+
+    .date-stamp {
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      padding: 8px 22px;
+      margin: 14px 0 28px;
+      font-size: 12px;
+      letter-spacing: 2px;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 12px 21px;
+      border: 1px solid #9a8773;
+      border-radius: 3px;
+      color: var(--ink);
+      background: var(--cream);
+      text-decoration: none;
+      transition: transform .2s, background .2s;
+    }
+
+    .button:hover {
+      background: #eee2ce;
+      transform: translateY(-2px);
+    }
+
+    .button-blue {
+      background: #dce5e8;
+      border-color: #9aafb9;
+    }
+
+    .small-flower {
+      position: absolute;
+      color: #b99c50;
+      opacity: .65;
+      font-size: 27px;
+    }
+
+    .flower-one { top: 13%; left: 9%; transform: rotate(-18deg); }
+    .flower-two { right: 8%; bottom: 17%; transform: rotate(17deg); }
+
+    .section {
+      width: min(880px, 100%);
+      margin: 0 auto;
+      padding: 75px 22px;
+    }
+
+    .section-heading {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    h2 {
+      font-size: clamp(30px, 6vw, 44px);
+      line-height: 1.2;
+      font-weight: normal;
+      font-style: italic;
+      margin: 9px 0;
+    }
+
+    .section-intro {
+      color: var(--muted);
+      font-size: 14px;
+      max-width: 470px;
+      margin: 0 auto;
+    }
+
+    .paper-card {
+      background: var(--cream);
+      border: 1px solid var(--line);
+      padding: 17px;
+      box-shadow: 0 8px 24px #5b48320b;
+    }
+
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      align-items: start;
+    }
+
+    .photo-card:nth-child(2) { margin-top: 28px; }
+    .photo-card:nth-child(3) {
+      grid-column: 1 / -1;
+      width: 78%;
+      justify-self: center;
+      margin-top: -4px;
+    }
+
+    .photo-card img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      background: #e9dfce;
+      border: 1px solid #e4d8c5;
+    }
+
+    .photo-card:nth-child(3) img { aspect-ratio: 16 / 10; }
+
+    .photo-caption {
+      font-size: 13px;
+      color: var(--muted);
+      text-align: center;
+      margin: 12px 2px 2px;
+      font-style: italic;
+    }
+
+    .memory-note {
+      background: #e1e9ec;
+      border-left: 3px solid #9fb6c2;
+      padding: 22px;
+      margin-top: 28px;
+      font-style: italic;
+      text-align: center;
+    }
+
+    .timeline {
+      border-left: 1px solid #c6b39c;
+      margin: 35px auto 0;
+      padding-left: 25px;
+      max-width: 580px;
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 30px;
+    }
+
+    .timeline-item::before {
+      content: "✳";
+      position: absolute;
+      left: -34px;
+      top: 0;
+      color: #b39a4d;
+      background: var(--paper);
+    }
+
+    .timeline-date {
+      text-transform: uppercase;
+      font-size: 10px;
+      letter-spacing: 2px;
+      color: var(--muted);
+    }
+
+    .timeline-item h3 {
+      font-size: 21px;
+      font-weight: normal;
+      margin: 4px 0 8px;
+    }
+
+    .timeline-item p { font-size: 15px; }
+
+    .voice-card {
+      max-width: 580px;
+      margin: auto;
+      text-align: center;
+      background: #e4eaeb;
+      border: 1px solid #c0cdd0;
+      padding: 30px 22px;
+    }
+
+    .voice-icon { font-size: 30px; }
+
+    audio {
+      width: 100%;
+      max-width: 430px;
+      margin: 14px 0 4px;
+    }
+
+    .voice-hint {
+      font-size: 12px;
+      color: #6c7779;
+      margin-bottom: 0;
+    }
+
+    .envelope-area { text-align: center; }
+
+    .envelope {
+      width: min(300px, 82vw);
+      height: 185px;
+      margin: 28px auto 22px;
+      position: relative;
+      border: 1px solid #c4ad8f;
+      background: #e6d4b8;
+      box-shadow: 0 10px 22px #493c3212;
+      overflow: hidden;
+      transition: transform .3s;
+    }
+
+    .envelope::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: #f1e3cd;
+      clip-path: polygon(0 0, 100% 0, 50% 63%);
+      border-bottom: 1px solid #c4ad8f;
+      transform-origin: top;
+      transition: transform .5s ease;
+      z-index: 2;
+    }
+
+    .envelope::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: #d8c09c;
+      clip-path: polygon(0 100%, 0 0, 50% 55%, 100% 0, 100% 100%);
+      z-index: 1;
+    }
+
+    .envelope-letter {
+      position: absolute;
+      left: 9%;
+      right: 9%;
+      top: 18%;
+      height: 75%;
+      background: var(--white);
+      border: 1px solid var(--line);
+      padding: 15px 5px;
+      z-index: 0;
+      transition: transform .5s ease;
+      font-style: italic;
+      font-size: 14px;
+    }
+
+    .seal {
+      position: absolute;
+      left: 50%;
+      top: 47%;
+      transform: translate(-50%, -50%);
+      width: 43px;
+      height: 43px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: #fff5d5;
+      background: #9e6556;
+      border: 2px solid #d6b39a;
+      z-index: 3;
+      transition: opacity .2s;
+    }
+
+    .envelope.open::before {
+      transform: rotateX(180deg);
+      z-index: 0;
+    }
+
+    .envelope.open .envelope-letter {
+      transform: translateY(-70px);
+      z-index: 3;
+    }
+
+    .envelope.open .seal { opacity: 0; }
+
+    .letter-content {
+      max-width: 610px;
+      margin: 25px auto 0;
+      padding: 28px 23px;
+      text-align: left;
+      background: var(--cream);
+      border: 1px solid var(--line);
+      box-shadow: 0 8px 24px #5b48320b;
+    }
+
+    .letter-content[hidden] { display: none; }
+
+    .letter-content p { font-size: 15px; }
+
+    .letter-signoff {
+      text-align: right;
+      font-style: italic;
+      margin-top: 25px;
+    }
+
+    .closing {
+      text-align: center;
+      padding: 75px 22px 65px;
+      background: #e7dfd0;
+    }
+
+    .closing h2 { max-width: 650px; margin: 12px auto 20px; }
+
+    .closing p {
+      max-width: 430px;
+      margin: 0 auto 20px;
+      color: #786858;
+    }
+
+    footer {
+      padding: 22px;
+      text-align: center;
+      font-size: 11px;
+      letter-spacing: 1px;
+      color: var(--muted);
+    }
+
+    @media (max-width: 520px) {
+      .hero { min-height: 85vh; }
+      .section { padding: 58px 18px; }
+      .photo-grid { gap: 10px; }
+      .paper-card { padding: 10px; }
+      .photo-caption { font-size: 12px; }
+      .photo-card:nth-child(3) { width: 90%; }
+      .letter-content { padding: 22px 18px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="top-note">a little archive of us · no. 001</div>
+
+  <header class="hero">
+    <span class="small-flower flower-one" aria-hidden="true">✳</span>
+    <span class="small-flower flower-two" aria-hidden="true">✳</span>
+
+    <div class="eyebrow">a little something for my favorite person</div>
+    <div class="sunflower" aria-hidden="true">☼</div>
+
+    <h1>A Little<br>Archive of Us</h1>
+
+    <p class="hero-subtitle">
+      for all the little moments that became something
+      i'll always want to remember.
+    </p>
+
+    <div class="date-stamp">SEPTEMBER 19, 2026 · OUR FIRST MONTH</div>
+
+    <a class="button" href="#memories">come inside, bab ♡</a>
+  </header>
+
+  <main>
+    <section class="section" id="memories">
+      <div class="section-heading">
+        <div class="eyebrow">chapter one · the little things</div>
+        <h2>pieces of us</h2>
+        <p class="section-intro">
+          A few little moments I wish I could keep in my pocket
+          and carry around with me.
+        </p>
+      </div>
+
+      <div class="photo-grid">
+        <article class="paper-card photo-card">
+          <img src="photo1.jpg" alt="One of our favorite memories">
+          <p class="photo-caption">one of my favorite versions of us.</p>
+        </article>
+
+        <article class="paper-card photo-card">
+          <img src="photo2.jpg" alt="A special date together">
+          <p class="photo-caption">the little dates I'll always remember.</p>
+        </article>
+
+        <article class="paper-card photo-card">
+          <img src="photo3.jpg" alt="A little detail from our story">
+          <p class="photo-caption">proof that the smallest things can mean so much.</p>
+        </article>
+      </div>
+
+      <div class="memory-note">
+        “It's funny how ordinary moments become the ones you want
+        to keep forever when they're spent with the right person.”
+      </div>
+    </section>
+
+    <section class="section" id="story">
+      <div class="section-heading">
+        <div class="eyebrow">chapter two · how it began</div>
+        <h2>our little timeline</h2>
+        <p class="section-intro">
+          Not the whole story, just a few pages I'll always hold close.
+        </p>
+      </div>
+
+      <div class="timeline">
+        <article class="timeline-item">
+          <div class="timeline-date">somewhere along the way</div>
+          <h3>getting to know you</h3>
+          <p>
+            All those conversations, the little updates, the laughter,
+            and the slow process of becoming a part of each other's lives.
+            Somehow, you became someone I wanted to tell everything to.
+          </p>
+        </article>
+
+        <article class="timeline-item">
+          <div class="timeline-date">the flowers & little surprises</div>
+          <h3>you remembered the little things</h3>
+          <p>
+            The flowers, the thoughtful gestures, and the details that
+            made me feel seen. You probably don't realize how many of
+            those moments I replay in my head.
+          </p>
+        </article>
+
+        <article class="timeline-item">
+          <div class="timeline-date">5:00 AM · september 19, 2026</div>
+          <h3>the morning I said yes</h3>
+          <p>
+            We went outside for some air and ended up talking for two
+            hours. There were sleepy eyes, tears, and so many feelings.
+            And then there was us, finally giving this thing a name.
+            I'd still say yes, bab. Every single time.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="voice">
+      <div class="section-heading">
+        <div class="eyebrow">chapter three · a little piece of me</div>
+        <h2>press play, bab</h2>
+        <p class="section-intro">
+          Since I can't always be there beside you, here's a little
+          piece of my voice you can keep.
+        </p>
+      </div>
+
+      <div class="voice-card">
+        <div class="voice-icon" aria-hidden="true">♫</div>
+        <h3 style="font-weight: normal; margin: 8px 0;">
+          a voice note for my favorite person
+        </h3>
+        <p style="font-size: 13px; color: #6c7779;">
+          recorded with love · october 17, 2026
+        </p>
+
+        <audio controls preload="metadata">
+          <source src="voice-note.mp3" type="audio/mpeg">
+          Your browser does not support audio playback.
+        </audio>
+
+        <p class="voice-hint">
+          Best listened to with your headphones on ♡
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="letter">
+      <div class="section-heading">
+        <div class="eyebrow">chapter four · open when you're ready</div>
+        <h2>something for you</h2>
+        <p class="section-intro">
+          A tiny letter, written for you and only you to read
+          whenever you need a reminder.
+        </p>
+      </div>
+
+      <div class="envelope-area">
+        <div class="envelope" id="envelope" aria-hidden="true">
+          <div class="envelope-letter">
+            <span>to my bab,</span><br>
+            <span>with all my love ♡</span>
+          </div>
+          <div class="seal">♡</div>
+        </div>
+
+        <button
+          class="button button-blue"
+          id="open-letter"
+          type="button"
+          aria-expanded="false"
+          aria-controls="letter-content">
+          open your letter ♡
+        </button>
+
+        <article class="letter-content" id="letter-content" hidden>
+          <p>to my bab,</p>
+
+          <p>
+            Happy first monthsary, my love. It's still a little crazy
+            that I finally get to call you my boyfriend, but I'm so
+            happy that it's you.
+          </p>
+
+          <p>
+            I keep thinking about our 5 AM conversation. If I could go
+            back to that morning, I'd still say yes to you. I'd still
+            choose you.
+          </p>
+
+          <p>
+            I know we're miles apart right now, and I wish I could be
+            there for the ordinary little things. But I hope you know
+            that I'm here, too. You don't have to be okay all the time
+            with me. You can talk to me when things get heavy, even if
+            you don't have the right words. I'll listen, I'll comfort
+            you, and sometimes I'll just stay with you through it.
+          </p>
+
+          <p>
+            I'm proud of you and everything you're working toward.
+            Please take care of yourself, eat properly, and rest when
+            you can, okay? There's someone here cheering for you,
+            even from far away.
+          </p>
+
+          <p>
+            One month down, and so many memories waiting for us.
+            More dates, more jokes, more photobooth pictures, and
+            more ordinary days that somehow become my favorites.
+          </p>
+
+          <p>
+            If you asked me all over again at 5 AM, with sleepy eyes
+            and tears in both our faces, I'd still say yes.
+          </p>
+
+          <div class="letter-signoff">
+            I love you so much. Always rooting for you,
+            always happy it's you. ♡<br><br>
+            love,<br>
+            your girl
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <section class="closing">
+    <div class="eyebrow">end of page one · more to come</div>
+    <div class="sunflower" aria-hidden="true">☼</div>
+    <h2>one month down,<br>so much life to go.</h2>
+    <p>
+      This is only the first little archive.
+      I can't wait to fill the next pages with you.
+    </p>
+    <p style="font-style: italic;">and i'd still say yes. every time.</p>
+    <a class="button" href="#memories">read our little story again ↑</a>
+  </section>
+
+  <footer>
+    made with love, a little patience, and lots of thoughts of you ♡
+  </footer>
+
+  <script>
+    const openButton = document.getElementById("open-letter");
+    const envelope = document.getElementById("envelope");
+    const letter = document.getElementById("letter-content");
+
+    openButton.addEventListener("click", () => {
+      const isOpening = letter.hidden;
+
+      letter.hidden = !isOpening;
+      envelope.classList.toggle("open", isOpening);
+      openButton.setAttribute("aria-expanded", String(isOpening));
+      openButton.textContent = isOpening
+        ? "close your letter ♡"
+        : "open your letter ♡";
+
+      if (isOpening) {
+        window.setTimeout(() => {
+          letter.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+          });
+        }, 200);
+      }
+    });
+  </script>
+</body>
+</html>
