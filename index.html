@@ -1,667 +1,347 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#f4eddf">
-  <title>A Little Archive of Us ♡</title>
-
-  <style>
-    :root {
-      --paper: #f7f1e6;
-      --cream: #fffaf1;
-      --ink: #493c32;
-      --muted: #8c7969;
-      --blue: #a9bbc7;
-      --yellow: #e6cb76;
-      --line: #d8c9b5;
-      --white: #fffdf8;
-    }
-
-    * { box-sizing: border-box; }
-
-    html {
-      scroll-behavior: smooth;
-      scroll-padding-top: 20px;
-    }
-
-    body {
-      margin: 0;
-      color: var(--ink);
-      background:
-        radial-gradient(ellipse at 10% 5%, #eadfca 0, transparent 38%),
-        var(--paper);
-      font-family: Georgia, "Times New Roman", serif;
-      line-height: 1.7;
-    }
-
-    button, audio { font: inherit; }
-
-    button { cursor: pointer; }
-
-    button:focus-visible, a:focus-visible {
-      outline: 3px solid #6c899b;
-      outline-offset: 4px;
-    }
-
-    .top-note {
-      padding: 10px 16px;
-      text-align: center;
-      background: #e5d9c7;
-      color: #6b5848;
-      font-size: 12px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-    }
-
-    .hero {
-      min-height: 92vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 55px 22px 70px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .eyebrow {
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 3px;
-      color: var(--muted);
-    }
-
-    h1, h2, h3, p { margin-top: 0; }
-
-    h1 {
-      font-size: clamp(43px, 9vw, 76px);
-      line-height: 1.05;
-      font-weight: normal;
-      font-style: italic;
-      max-width: 720px;
-      margin: 18px 0;
-    }
-
-    .hero-subtitle {
-      max-width: 390px;
-      color: var(--muted);
-      margin-bottom: 28px;
-    }
-
-    .sunflower {
-      font-size: 35px;
-      color: #b89a42;
-      margin: 12px 0;
-    }
-
-    .date-stamp {
-      border-top: 1px solid var(--line);
-      border-bottom: 1px solid var(--line);
-      padding: 8px 22px;
-      margin: 14px 0 28px;
-      font-size: 12px;
-      letter-spacing: 2px;
-    }
-
-    .button {
-      display: inline-block;
-      padding: 12px 21px;
-      border: 1px solid #9a8773;
-      border-radius: 3px;
-      color: var(--ink);
-      background: var(--cream);
-      text-decoration: none;
-      transition: transform .2s, background .2s;
-    }
-
-    .button:hover {
-      background: #eee2ce;
-      transform: translateY(-2px);
-    }
-
-    .button-blue {
-      background: #dce5e8;
-      border-color: #9aafb9;
-    }
-
-    .small-flower {
-      position: absolute;
-      color: #b99c50;
-      opacity: .65;
-      font-size: 27px;
-    }
-
-    .flower-one { top: 13%; left: 9%; transform: rotate(-18deg); }
-    .flower-two { right: 8%; bottom: 17%; transform: rotate(17deg); }
-
-    .section {
-      width: min(880px, 100%);
-      margin: 0 auto;
-      padding: 75px 22px;
-    }
-
-    .section-heading {
-      text-align: center;
-      margin-bottom: 30px;
-    }
-
-    h2 {
-      font-size: clamp(30px, 6vw, 44px);
-      line-height: 1.2;
-      font-weight: normal;
-      font-style: italic;
-      margin: 9px 0;
-    }
-
-    .section-intro {
-      color: var(--muted);
-      font-size: 14px;
-      max-width: 470px;
-      margin: 0 auto;
-    }
-
-    .paper-card {
-      background: var(--cream);
-      border: 1px solid var(--line);
-      padding: 17px;
-      box-shadow: 0 8px 24px #5b48320b;
-    }
-
-    .photo-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 18px;
-      align-items: start;
-    }
-
-    .photo-card:nth-child(2) { margin-top: 28px; }
-    .photo-card:nth-child(3) {
-      grid-column: 1 / -1;
-      width: 78%;
-      justify-self: center;
-      margin-top: -4px;
-    }
-
-    .photo-card img {
-      display: block;
-      width: 100%;
-      aspect-ratio: 4 / 5;
-      object-fit: cover;
-      background: #e9dfce;
-      border: 1px solid #e4d8c5;
-    }
-
-    .photo-card:nth-child(3) img { aspect-ratio: 16 / 10; }
-
-    .photo-caption {
-      font-size: 13px;
-      color: var(--muted);
-      text-align: center;
-      margin: 12px 2px 2px;
-      font-style: italic;
-    }
-
-    .memory-note {
-      background: #e1e9ec;
-      border-left: 3px solid #9fb6c2;
-      padding: 22px;
-      margin-top: 28px;
-      font-style: italic;
-      text-align: center;
-    }
-
-    .timeline {
-      border-left: 1px solid #c6b39c;
-      margin: 35px auto 0;
-      padding-left: 25px;
-      max-width: 580px;
-    }
-
-    .timeline-item {
-      position: relative;
-      margin-bottom: 30px;
-    }
-
-    .timeline-item::before {
-      content: "✳";
-      position: absolute;
-      left: -34px;
-      top: 0;
-      color: #b39a4d;
-      background: var(--paper);
-    }
-
-    .timeline-date {
-      text-transform: uppercase;
-      font-size: 10px;
-      letter-spacing: 2px;
-      color: var(--muted);
-    }
-
-    .timeline-item h3 {
-      font-size: 21px;
-      font-weight: normal;
-      margin: 4px 0 8px;
-    }
-
-    .timeline-item p { font-size: 15px; }
-
-    .voice-card {
-      max-width: 580px;
-      margin: auto;
-      text-align: center;
-      background: #e4eaeb;
-      border: 1px solid #c0cdd0;
-      padding: 30px 22px;
-    }
-
-    .voice-icon { font-size: 30px; }
-
-    audio {
-      width: 100%;
-      max-width: 430px;
-      margin: 14px 0 4px;
-    }
-
-    .voice-hint {
-      font-size: 12px;
-      color: #6c7779;
-      margin-bottom: 0;
-    }
-
-    .envelope-area { text-align: center; }
-
-    .envelope {
-      width: min(300px, 82vw);
-      height: 185px;
-      margin: 28px auto 22px;
-      position: relative;
-      border: 1px solid #c4ad8f;
-      background: #e6d4b8;
-      box-shadow: 0 10px 22px #493c3212;
-      overflow: hidden;
-      transition: transform .3s;
-    }
-
-    .envelope::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: #f1e3cd;
-      clip-path: polygon(0 0, 100% 0, 50% 63%);
-      border-bottom: 1px solid #c4ad8f;
-      transform-origin: top;
-      transition: transform .5s ease;
-      z-index: 2;
-    }
-
-    .envelope::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: #d8c09c;
-      clip-path: polygon(0 100%, 0 0, 50% 55%, 100% 0, 100% 100%);
-      z-index: 1;
-    }
-
-    .envelope-letter {
-      position: absolute;
-      left: 9%;
-      right: 9%;
-      top: 18%;
-      height: 75%;
-      background: var(--white);
-      border: 1px solid var(--line);
-      padding: 15px 5px;
-      z-index: 0;
-      transition: transform .5s ease;
-      font-style: italic;
-      font-size: 14px;
-    }
-
-    .seal {
-      position: absolute;
-      left: 50%;
-      top: 47%;
-      transform: translate(-50%, -50%);
-      width: 43px;
-      height: 43px;
-      border-radius: 50%;
-      display: grid;
-      place-items: center;
-      color: #fff5d5;
-      background: #9e6556;
-      border: 2px solid #d6b39a;
-      z-index: 3;
-      transition: opacity .2s;
-    }
-
-    .envelope.open::before {
-      transform: rotateX(180deg);
-      z-index: 0;
-    }
-
-    .envelope.open .envelope-letter {
-      transform: translateY(-70px);
-      z-index: 3;
-    }
-
-    .envelope.open .seal { opacity: 0; }
-
-    .letter-content {
-      max-width: 610px;
-      margin: 25px auto 0;
-      padding: 28px 23px;
-      text-align: left;
-      background: var(--cream);
-      border: 1px solid var(--line);
-      box-shadow: 0 8px 24px #5b48320b;
-    }
-
-    .letter-content[hidden] { display: none; }
-
-    .letter-content p { font-size: 15px; }
-
-    .letter-signoff {
-      text-align: right;
-      font-style: italic;
-      margin-top: 25px;
-    }
-
-    .closing {
-      text-align: center;
-      padding: 75px 22px 65px;
-      background: #e7dfd0;
-    }
-
-    .closing h2 { max-width: 650px; margin: 12px auto 20px; }
-
-    .closing p {
-      max-width: 430px;
-      margin: 0 auto 20px;
-      color: #786858;
-    }
-
-    footer {
-      padding: 22px;
-      text-align: center;
-      font-size: 11px;
-      letter-spacing: 1px;
-      color: var(--muted);
-    }
-
-    @media (max-width: 520px) {
-      .hero { min-height: 85vh; }
-      .section { padding: 58px 18px; }
-      .photo-grid { gap: 10px; }
-      .paper-card { padding: 10px; }
-      .photo-caption { font-size: 12px; }
-      .photo-card:nth-child(3) { width: 90%; }
-      .letter-content { padding: 22px 18px; }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        scroll-behavior: auto !important;
-        transition: none !important;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1d2233">
+<title>A Little Archive of Us ♡</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#1d2233;--panel:#2b3247;--cream:#ece5d8;--gold:#d3bc8e;--gold2:#b9975b;--teal:#8fc1d1;--mute:#a9a79f}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;color:var(--cream);font:500 18px/1.65 "Cormorant Garamond",Georgia,serif;
+background:radial-gradient(circle at 15% 0,#3a4566 0,transparent 45%),
+radial-gradient(1.5px 1.5px at 30px 40px,#fff9 50%,transparent),
+radial-gradient(1px 1px at 110px 100px,#fff7 50%,transparent),
+radial-gradient(1.5px 1.5px at 70px 140px,#d3bc8eaa 50%,transparent),var(--navy);
+background-size:auto,170px 170px,170px 170px,170px 170px,auto;min-height:100vh}
+[hidden]{display:none!important}
+h1,h2,h3{font-family:Marcellus,Georgia,serif;font-weight:400;margin:0}
+button{font:inherit;cursor:pointer}
+button:focus-visible,a:focus-visible,[contenteditable]:focus-visible{outline:2px solid var(--teal);outline-offset:3px}
+.screen{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:28px 18px}
+.gem{color:var(--gold);animation:tw 3s ease-in-out infinite}
+@keyframes tw{50%{opacity:.45;transform:scale(.85)}}
+.panel{position:relative;background:var(--panel);border:1px solid #d3bc8e66;padding:26px 22px;width:min(440px,100%);box-shadow:0 0 0 4px #1d2233,0 0 0 5px #d3bc8e44}
+.panel::before,.panel::after{content:"◆";position:absolute;color:var(--gold);font-size:11px;top:-8px;background:var(--navy);padding:0 4px}
+.panel::before{left:14px}.panel::after{right:14px}
+.btn{display:inline-block;background:var(--cream);color:#3b4255;border:0;border-radius:999px;padding:10px 26px;font-family:Marcellus,serif;font-size:16px;text-decoration:none;transition:background .2s}
+.btn:hover{background:#fff}
+.btn.ghost{background:transparent;color:var(--gold);border:1px solid var(--gold)}
+.btn.ghost:hover{background:#d3bc8e22}
+.msg{min-height:3.4em;color:var(--teal);margin:10px 0 4px}
+.small{font-size:15px;color:var(--mute)}
+.dots{display:flex;justify-content:center;gap:14px;margin:18px 0 6px}
+.dots i{width:14px;height:14px;transform:rotate(45deg);border:1.5px solid var(--gold)}
+.dots i.on{background:var(--gold)}
+.dots.shake{animation:sh .4s}
+@keyframes sh{20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}
+.pad{display:grid;grid-template-columns:repeat(3,64px);gap:12px;justify-content:center;margin-top:14px}
+.pad button{height:54px;border-radius:50%;border:1px solid #d3bc8e88;background:#3b4255;color:var(--cream);font:22px Marcellus,serif}
+.pad button:active{background:var(--gold);color:var(--navy)}
+.board{width:min(78vw,288px);aspect-ratio:9/16;margin:16px auto;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(4,1fr);gap:2px;border:2px solid var(--gold);background:#0006}
+.board button{border:0;padding:0;background-image:url(photo16.jpg);background-size:300% 400%;background-color:#3b4255}
+.board button.blank{visibility:hidden}
+.board.done{gap:0}
+.wrap{width:min(900px,100%);margin:0 auto;padding:70px 20px 10px}
+.head{text-align:center;margin-bottom:28px}
+.head h2{font-size:clamp(28px,6vw,40px);margin:6px 0}
+.head p{color:var(--mute);max-width:460px;margin:0 auto}
+.rule{color:var(--gold);letter-spacing:10px;font-size:12px}
+.hero h1{font-size:clamp(40px,10vw,74px);line-height:1.1;margin:14px 0}
+.grid{columns:2 150px;column-gap:12px}
+.card{break-inside:avoid;margin-bottom:12px;background:var(--panel);border:1px solid #d3bc8e44;padding:8px 8px 4px}
+.card img{display:block;width:100%;height:auto;background:#3b4255;min-height:90px}
+.card p{margin:8px 2px;font-size:15px;font-style:italic;text-align:center;color:var(--mute)}
+.add{text-align:center;margin-top:16px}
+.quests{max-width:600px;margin:0 auto;border-left:1px solid #d3bc8e66;padding-left:26px}
+.quest{position:relative;margin-bottom:34px}
+.quest::before{content:"◆";position:absolute;left:-35px;top:2px;color:var(--gold);background:var(--navy);font-size:13px}
+.quest h3{font-size:22px;color:var(--gold)}
+.quest p{margin:6px 0 0}
+audio{width:100%;max-width:420px;margin:14px 0 4px}
+.links{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.env{width:min(290px,80vw);height:180px;margin:26px auto 20px;position:relative;background:#c9b48c;border:1px solid var(--gold2);overflow:hidden}
+.env::before{content:"";position:absolute;inset:0;background:#e3d3b0;clip-path:polygon(0 0,100% 0,50% 63%);transform-origin:top;transition:transform .5s;z-index:2}
+.env::after{content:"";position:absolute;inset:0;background:#b9a177;clip-path:polygon(0 100%,0 0,50% 55%,100% 0,100% 100%);z-index:1}
+.env .ltr{position:absolute;left:9%;right:9%;top:18%;height:75%;background:var(--cream);color:#3b4255;padding:14px 8px;transition:transform .5s;z-index:0;font-style:italic;font-size:15px}
+.env .seal{position:absolute;left:50%;top:47%;width:40px;height:40px;margin:-20px;border-radius:50%;display:grid;place-items:center;background:#3b4255;color:var(--gold);border:2px solid var(--gold);z-index:3;transition:opacity .2s}
+.env.open::before{transform:rotateX(180deg);z-index:0}
+.env.open .ltr{transform:translateY(-70px);z-index:3}
+.env.open .seal{opacity:0}
+.letter{max-width:620px;margin:26px auto 0;text-align:left}
+.letter p{margin:0 0 14px}
+.sign{text-align:right;font-style:italic}
+.close{text-align:center;padding:80px 20px 50px}
+.close h2{font-size:clamp(28px,6vw,42px);margin:12px 0}
+footer{text-align:center;color:var(--mute);font-size:14px;padding:10px 20px 40px}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
 </head>
-
 <body>
-  <div class="top-note">a little archive of us · no. 001</div>
 
-  <header class="hero">
-    <span class="small-flower flower-one" aria-hidden="true">✳</span>
-    <span class="small-flower flower-two" aria-hidden="true">✳</span>
+<!-- SCREEN 1: PIN -->
+<div class="screen" id="gate">
+  <div class="gem" aria-hidden="true">✦</div>
+  <div class="panel">
+    <h1 style="font-size:30px">A Little Archive of Us</h1>
+    <p style="margin:8px 0 0">Sealed. Only my boyfriend has the key, so let's see if that's you.</p>
+    <div class="dots" id="dots" aria-hidden="true"></div>
+    <div class="msg" id="msg" aria-live="polite">Enter the 6-digit date.</div>
+    <div class="pad" id="pad"></div>
+    <p class="small" id="hint" hidden>Hint: the day you asked me. MMDDYY. Even Zhongli remembers this one, and he forgets his wallet.</p>
+  </div>
+</div>
 
-    <div class="eyebrow">a little something for my favorite person</div>
-    <div class="sunflower" aria-hidden="true">☼</div>
+<!-- SCREEN 2: PUZZLE -->
+<div class="screen" id="puz" hidden>
+  <div class="gem" aria-hidden="true">✦</div>
+  <h2 style="font-size:30px">Second seal</h2>
+  <p id="pmsg" style="max-width:340px">Slide the pieces back together. Yes, that's us. Yes, you have to fix it.</p>
+  <div class="board" id="board"></div>
+  <p class="small" id="count">Moves: 0</p>
+  <button class="btn ghost" id="skip" hidden>skip it, you're forgiven</button>
+  <button class="btn" id="enter" hidden>open the archive</button>
+</div>
 
-    <h1>A Little<br>Archive of Us</h1>
-
-    <p class="hero-subtitle">
-      for all the little moments that became something
-      i'll always want to remember.
-    </p>
-
-    <div class="date-stamp">SEPTEMBER 19, 2026 · OUR FIRST MONTH</div>
-
-    <a class="button" href="#memories">come inside, bab ♡</a>
+<!-- SCREEN 3: SITE -->
+<div id="site" hidden>
+  <header class="screen hero" style="min-height:88vh">
+    <div class="gem" aria-hidden="true" style="font-size:34px">✦</div>
+    <h1>A Little Archive of Us</h1>
+    <p style="max-width:380px;color:var(--mute)">Welcome back, Traveler. Happy first monthsary, bab.</p>
+    <div class="rule">◆ ◆ ◆</div>
+    <p class="small">September 19, 2026 · our first month</p>
+    <a class="btn" href="#pieces">start scrolling</a>
   </header>
 
-  <main>
-    <section class="section" id="memories">
-      <div class="section-heading">
-        <div class="eyebrow">chapter one · the little things</div>
-        <h2>pieces of us</h2>
-        <p class="section-intro">
-          A few little moments I wish I could keep in my pocket
-          and carry around with me.
-        </p>
-      </div>
-
-      <div class="photo-grid">
-        <article class="paper-card photo-card">
-          <img src="photo1.jpg" alt="One of our favorite memories">
-          <p class="photo-caption">one of my favorite versions of us.</p>
-        </article>
-
-        <article class="paper-card photo-card">
-          <img src="photo2.jpg" alt="A special date together">
-          <p class="photo-caption">the little dates I'll always remember.</p>
-        </article>
-
-        <article class="paper-card photo-card">
-          <img src="photo3.jpg" alt="A little detail from our story">
-          <p class="photo-caption">proof that the smallest things can mean so much.</p>
-        </article>
-      </div>
-
-      <div class="memory-note">
-        “It's funny how ordinary moments become the ones you want
-        to keep forever when they're spent with the right person.”
-      </div>
-    </section>
-
-    <section class="section" id="story">
-      <div class="section-heading">
-        <div class="eyebrow">chapter two · how it began</div>
-        <h2>our little timeline</h2>
-        <p class="section-intro">
-          Not the whole story, just a few pages I'll always hold close.
-        </p>
-      </div>
-
-      <div class="timeline">
-        <article class="timeline-item">
-          <div class="timeline-date">somewhere along the way</div>
-          <h3>getting to know you</h3>
-          <p>
-            All those conversations, the little updates, the laughter,
-            and the slow process of becoming a part of each other's lives.
-            Somehow, you became someone I wanted to tell everything to.
-          </p>
-        </article>
-
-        <article class="timeline-item">
-          <div class="timeline-date">the flowers & little surprises</div>
-          <h3>you remembered the little things</h3>
-          <p>
-            The flowers, the thoughtful gestures, and the details that
-            made me feel seen. You probably don't realize how many of
-            those moments I replay in my head.
-          </p>
-        </article>
-
-        <article class="timeline-item">
-          <div class="timeline-date">5:00 AM · september 19, 2026</div>
-          <h3>the morning I said yes</h3>
-          <p>
-            We went outside for some air and ended up talking for two
-            hours. There were sleepy eyes, tears, and so many feelings.
-            And then there was us, finally giving this thing a name.
-            I'd still say yes, bab. Every single time.
-          </p>
-        </article>
-      </div>
-    </section>
-
-    <section class="section" id="voice">
-      <div class="section-heading">
-        <div class="eyebrow">chapter three · a little piece of me</div>
-        <h2>press play, bab</h2>
-        <p class="section-intro">
-          Since I can't always be there beside you, here's a little
-          piece of my voice you can keep.
-        </p>
-      </div>
-
-      <div class="voice-card">
-        <div class="voice-icon" aria-hidden="true">♫</div>
-        <h3 style="font-weight: normal; margin: 8px 0;">
-          a voice note for my favorite person
-        </h3>
-        <p style="font-size: 13px; color: #6c7779;">
-          recorded with love · october 17, 2026
-        </p>
-
-        <audio controls preload="metadata">
-          <source src="voice-note.mp3" type="audio/mpeg">
-          Your browser does not support audio playback.
-        </audio>
-
-        <p class="voice-hint">
-          Best listened to with your headphones on ♡
-        </p>
-      </div>
-    </section>
-
-    <section class="section" id="letter">
-      <div class="section-heading">
-        <div class="eyebrow">chapter four · open when you're ready</div>
-        <h2>something for you</h2>
-        <p class="section-intro">
-          A tiny letter, written for you and only you to read
-          whenever you need a reminder.
-        </p>
-      </div>
-
-      <div class="envelope-area">
-        <div class="envelope" id="envelope" aria-hidden="true">
-          <div class="envelope-letter">
-            <span>to my bab,</span><br>
-            <span>with all my love ♡</span>
-          </div>
-          <div class="seal">♡</div>
-        </div>
-
-        <button
-          class="button button-blue"
-          id="open-letter"
-          type="button"
-          aria-expanded="false"
-          aria-controls="letter-content">
-          open your letter ♡
-        </button>
-
-        <article class="letter-content" id="letter-content" hidden>
-          <p>to my bab,</p>
-
-          <p>
-            Happy first monthsary, my love. It's still a little crazy
-            that I finally get to call you my boyfriend, but I'm so
-            happy that it's you.
-          </p>
-
-          <p>
-            I keep thinking about our 5 AM conversation. If I could go
-            back to that morning, I'd still say yes to you. I'd still
-            choose you.
-          </p>
-
-          <p>
-            I know we're miles apart right now, and I wish I could be
-            there for the ordinary little things. But I hope you know
-            that I'm here, too. You don't have to be okay all the time
-            with me. You can talk to me when things get heavy, even if
-            you don't have the right words. I'll listen, I'll comfort
-            you, and sometimes I'll just stay with you through it.
-          </p>
-
-          <p>
-            I'm proud of you and everything you're working toward.
-            Please take care of yourself, eat properly, and rest when
-            you can, okay? There's someone here cheering for you,
-            even from far away.
-          </p>
-
-          <p>
-            One month down, and so many memories waiting for us.
-            More dates, more jokes, more photobooth pictures, and
-            more ordinary days that somehow become my favorites.
-          </p>
-
-          <p>
-            If you asked me all over again at 5 AM, with sleepy eyes
-            and tears in both our faces, I'd still say yes.
-          </p>
-
-          <div class="letter-signoff">
-            I love you so much. Always rooting for you,
-            always happy it's you. ♡<br><br>
-            love,<br>
-            your girl
-          </div>
-        </article>
-      </div>
-    </section>
-  </main>
-
-  <section class="closing">
-    <div class="eyebrow">end of page one · more to come</div>
-    <div class="sunflower" aria-hidden="true">☼</div>
-    <h2>one month down,<br>so much life to go.</h2>
-    <p>
-      This is only the first little archive.
-      I can't wait to fill the next pages with you.
-    </p>
-    <p style="font-style: italic;">and i'd still say yes. every time.</p>
-    <a class="button" href="#memories">read our little story again ↑</a>
+  <section class="wrap" id="pieces">
+    <div class="head">
+      <h2>pieces of us</h2>
+      <p>A dump of our dates, our random days, and our Genshin screenshots. Tap a caption to edit it, or add your own photos.</p>
+    </div>
+    <div class="grid" id="grid"></div>
+    <div class="add">
+      <input type="file" id="file" accept="image/*" multiple hidden>
+      <button class="btn" id="addbtn">add a photo</button>
+      <p class="small">Photos and captions you add are saved on this device only.</p>
+    </div>
   </section>
 
-  <footer>
-    made with love, a little patience, and lots of thoughts of you ♡
-  </footer>
+  <section class="wrap" id="story">
+    <div class="head"><h2>our little timeline</h2></div>
+    <div class="quests">
+      <div class="quest"><h3>We started talking</h3>
+        <p>we started talking, and somewhere along the way, you became someone i genuinely looked forward to hearing from. it wasn't exactly a straight path for us, and things weren't always simple, but somehow, we found our way back to each other. and i'm really glad we did.</p></div>
+      <div class="quest"><h3>The crush turned into something more</h3>
+        <p>i don't even know the exact moment it happened. i just know that little by little, you became someone i wanted to know better, spend more time with, and make memories with. even the simplest moments with you started meaning a lot to me.</p></div>
+      <div class="quest"><h3>The café and the flowers</h3>
+        <p>then there was that café date when you surprised me with flowers. and the dates after that. do you even understand how much that means to me? 🥹 it's one of those memories i know i'll keep coming back to. the late-night talks and walks, the random moments, all the little things that slowly became our things.</p></div>
+      <div class="quest"><h3>5 AM, September 19</h3>
+        <p>4 AM-ish? 5 AM? whatever. we talked for almost two hours, and somehow we both ended up crying. you told me you'd been planning to ask me since june, and that you'd already bought me a bracelet months ago. 😭 like, excuse me??? YOU HAD THIS PLANNED FOR THAT LONG??? HAHAHAHA. i don't think i'll ever forget that morning. it felt surreal finally getting to call you my boyfriend. and if i could go back to it, knowing everything i know now, i'd still say yes. every single time.</p></div>
+    </div>
+  </section>
 
-  <script>
-    const openButton = document.getElementById("open-letter");
-    const envelope = document.getElementById("envelope");
-    const letter = document.getElementById("letter-content");
+  <section class="wrap" id="voice">
+    <div class="head"><h2>press play, bab</h2><p>Since I can't always be there, here's a little piece of my voice.</p></div>
+    <div class="panel" style="margin:auto;text-align:center">
+      <div class="gem" aria-hidden="true">♫</div>
+      <audio controls preload="metadata"><source src="voice-note.mp3" type="audio/mpeg">Your browser does not support audio playback.</audio>
+      <p class="small" style="margin:0">Headphones on, please.</p>
+    </div>
+  </section>
 
-    openButton.addEventListener("click", () => {
-      const isOpening = letter.hidden;
+  <section class="wrap" id="music">
+    <div class="head"><h2>songs for you</h2><p>I made these for you. Play them when you're studying, or when you miss me.</p></div>
+    <div class="links">
+      <a class="btn" target="_blank" rel="noopener" href="https://open.spotify.com/playlist/6YeKSsSLAvu5Narau7OHbb?si=JabragZHTqWKVFggwTHYjg">playlist no. 1</a>
+      <a class="btn" target="_blank" rel="noopener" href="https://open.spotify.com/playlist/4qskqQpPlYMvKYboNSGW4f?si=b0QgN3q_TDmNmCy-ebHLhg">playlist no. 2</a>
+    </div>
+  </section>
 
-      letter.hidden = !isOpening;
-      envelope.classList.toggle("open", isOpening);
-      openButton.setAttribute("aria-expanded", String(isOpening));
-      openButton.textContent = isOpening
-        ? "close your letter ♡"
-        : "open your letter ♡";
+  <section class="wrap" id="letter">
+    <div class="head"><h2>one more thing</h2></div>
+    <div style="text-align:center">
+      <div class="env" id="env" aria-hidden="true"><div class="ltr">to my bab,<br>mwamwamwa ♡</div><div class="seal">♡</div></div>
+      <button class="btn" id="open" aria-expanded="false" aria-controls="lt">open the letter</button>
+    </div>
+    <article class="letter panel" id="lt" hidden>
+      <p>bab, one more thing. gusto ko lang maaraman mo how proud i am of you, especially with your reviews and exams for your Aviation Maintenance Specialist license. i know it takes a lot of time, effort, and patience, and i hope you know that i'm always cheering for you. i believe in you, and i hope you believe in yourself, din syempre ika na yan.</p>
+      <p>but please take care of yourself for me rin, okkk? less puyat (kahit ikaw lang, di na ako chos), drink your potable h2o, eat ON TIME, and don't forget to rest when you need to. i know you have things you're working hard for, and i want to see you achieve all of them, but i also want you to be okay while getting there.</p>
+      <p>and of course, i'm really looking forward to seeing you again. i miss you more than i can explain, and i can't wait to be beside you again, hug, kiss and bite you for as long as i want, and make more memories with you. sana soon na, please. HAHAHAHA.</p>
+      <p>i'm always rooting for you, baby. i'm proud of you not just for the things you achieve, but also for the person you are and the effort you put into becoming who you want to be. i love you, bab. mwamwamwa 🤍</p>
+      <p class="sign">love,<br>your girl</p>
+    </article>
+  </section>
 
-      if (isOpening) {
-        window.setTimeout(() => {
-          letter.scrollIntoView({
-            behavior: "smooth",
-            block: "start"
-          });
-        }, 200);
-      }
-    });
-  </script>
+  <section class="close">
+    <div class="gem" aria-hidden="true">✦</div>
+    <h2>happy first monthsary, bab.</h2>
+    <p>i'm so happy it's you. ♡</p>
+    <p style="font-style:italic">and i'd still say yes. every single time.</p>
+    <a class="btn ghost" href="#pieces">back to the top of the archive</a>
+  </section>
+  <footer>made with love, a little patience, and lots of thoughts of you ♡</footer>
+</div>
+
+<script>
+/* ============ EDIT ME ============ */
+const PIN = "091926";            // MMDDYY: the day you became official
+const PHOTOS = [                 // [file name, caption]. Add Genshin screenshots the same way.
+  ["photo1.jpg",  "caption here"],
+  ["photo2.jpg",  "caption here"],
+  ["photo3.jpg",  "caption here"],
+  ["photo4.jpg",  "caption here"],
+  ["photo5.jpg",  "caption here"],
+  ["photo6.jpg",  "caption here"],
+  ["photo7.jpg",  "caption here"],
+  ["photo8.jpg",  "caption here"],
+  ["photo9.jpg",  "caption here"],
+  ["photo10.jpg", "caption here"],
+  ["photo11.jpg", "caption here"],
+  ["photo12.jpg", "caption here"],
+  ["photo13.jpg", "caption here"],
+  ["photo14.jpg", "caption here"],
+  ["photo15.jpg", "caption here"]
+];
+const WRONG = [                  // what shows when he gets the PIN wrong
+  "maligo ka na baby, naaamoy na kita. Wrong PIN.",
+  "magkarigos ka na baby, namamarong ka na. Wrong PIN.",
+  "ikaw ah, may foot fetish ka. Wrong PIN.",
+  "ika haaa, mahilig ka sa bitis. Still wrong.",
+  "Wow. You had ONE job, bab."
+];
+/* ================================== */
+
+const $ = id => document.getElementById(id);
+function show(id){ ["gate","puz","site"].forEach(s => $(s).hidden = s !== id); scrollTo(0,0); }
+
+/* ---- PIN ---- */
+let pin = "", tries = 0;
+const dots = $("dots"), pad = $("pad");
+dots.innerHTML = "<i></i>".repeat(6);
+["1","2","3","4","5","6","7","8","9","","0","⌫"].forEach(k => {
+  const b = document.createElement("button");
+  b.textContent = k; b.type = "button";
+  if (!k) b.style.visibility = "hidden"; else b.onclick = () => key(k);
+  pad.appendChild(b);
+});
+function draw(){ [...dots.children].forEach((d,i) => d.classList.toggle("on", i < pin.length)); }
+function key(k){
+  if (k === "⌫") pin = pin.slice(0,-1);
+  else if (pin.length < 6) pin += k;
+  draw();
+  if (pin.length === 6) setTimeout(check, 180);
+}
+function check(){
+  if (pin === PIN){ $("msg").textContent = "Correct. Hmm, you may pass."; setTimeout(() => { show("puz"); startPuzzle(); }, 700); return; }
+  $("msg").textContent = WRONG[tries % WRONG.length]; tries++;
+  if (tries >= 2) $("hint").hidden = false;
+  dots.classList.remove("shake"); void dots.offsetWidth; dots.classList.add("shake");
+  pin = ""; draw();
+}
+addEventListener("keydown", e => {
+  if ($("gate").hidden) return;
+  if (/^\d$/.test(e.key)) key(e.key); else if (e.key === "Backspace") key("⌫");
+});
+
+/* ---- Puzzle (3 x 4 sliding tiles) ---- */
+const C = 3, R = 4, N = C * R;
+let tiles = [], moves = 0;
+const board = $("board");
+function startPuzzle(){
+  tiles = [...Array(N).keys()]; moves = 0;
+  let blank = N - 1, prev = -1;
+  for (let i = 0; i < 250; i++){
+    const r = Math.floor(blank / C), c = blank % C, opts = [];
+    if (r > 0) opts.push(blank - C); if (r < R-1) opts.push(blank + C);
+    if (c > 0) opts.push(blank - 1); if (c < C-1) opts.push(blank + 1);
+    const o = opts.filter(x => x !== prev), n = o[Math.floor(Math.random() * o.length)];
+    [tiles[blank], tiles[n]] = [tiles[n], tiles[blank]]; prev = blank; blank = n;
+  }
+  board.classList.remove("done"); $("enter").hidden = true; $("skip").hidden = true;
+  $("pmsg").textContent = "Slide the pieces back together. Yes, that's us. Yes, you have to fix it.";
+  $("count").textContent = "Moves: 0"; drawBoard();
+}
+function drawBoard(){
+  board.innerHTML = "";
+  tiles.forEach((v, i) => {
+    const b = document.createElement("button");
+    b.type = "button"; b.setAttribute("aria-label", "puzzle piece");
+    b.style.backgroundPosition = `${(v % C) * 50}% ${Math.floor(v / C) * 33.333}%`;
+    if (v === N - 1) b.classList.add("blank");
+    b.onclick = () => tap(i);
+    board.appendChild(b);
+  });
+}
+function tap(i){
+  const blank = tiles.indexOf(N - 1);
+  const near = (Math.abs(i - blank) === C) || (Math.abs(i - blank) === 1 && Math.floor(i / C) === Math.floor(blank / C));
+  if (!near) return;
+  [tiles[i], tiles[blank]] = [tiles[blank], tiles[i]];
+  $("count").textContent = "Moves: " + (++moves);
+  if (moves === 40) $("skip").hidden = false;
+  drawBoard();
+  if (tiles.every((v, k) => v === k)) win();
+}
+function win(){
+  board.classList.add("done");
+  board.querySelectorAll("button").forEach(b => { b.classList.remove("blank"); b.onclick = null; });
+  $("pmsg").textContent = "There we are. Took you long enough. 🥹";
+  $("skip").hidden = true; $("enter").hidden = false;
+}
+$("skip").onclick = win;
+$("enter").onclick = () => { show("site"); renderGrid(); };
+
+/* ---- Gallery (captions + uploads saved in this browser only) ---- */
+let store = { caps: {}, ups: [] };
+try { store = Object.assign(store, JSON.parse(localStorage.getItem("archive") || "{}")); } catch (e) {}
+function save(){
+  try { localStorage.setItem("archive", JSON.stringify(store)); }
+  catch (e) { alert("Couldn't save, the browser storage is full. Try fewer photos."); }
+}
+function renderGrid(){
+  const g = $("grid"); g.innerHTML = "";
+  const all = PHOTOS.map(p => ({ src: p[0], cap: store.caps[p[0]] ?? p[1], key: p[0] }))
+    .concat(store.ups.map((u, i) => ({ src: u.src, cap: u.cap, up: i })));
+  all.forEach(p => {
+    const d = document.createElement("figure"); d.className = "card"; d.style.margin = "0 0 12px";
+    const im = document.createElement("img"); im.src = p.src; im.alt = p.cap; im.loading = "lazy";
+    const c = document.createElement("p"); c.contentEditable = "true"; c.textContent = p.cap;
+    c.onblur = () => {
+      const t = c.textContent.trim();
+      if (p.up !== undefined) store.ups[p.up].cap = t; else store.caps[p.key] = t;
+      save();
+    };
+    d.append(im, c); g.appendChild(d);
+  });
+}
+$("addbtn").onclick = () => $("file").click();
+$("file").onchange = e => {
+  [...e.target.files].forEach(f => {
+    const img = new Image(), url = URL.createObjectURL(f);
+    img.onload = () => {
+      const s = Math.min(1, 900 / Math.max(img.width, img.height)), cv = document.createElement("canvas");
+      cv.width = img.width * s; cv.height = img.height * s;
+      cv.getContext("2d").drawImage(img, 0, 0, cv.width, cv.height);
+      store.ups.push({ src: cv.toDataURL("image/jpeg", .72), cap: "tap to write a caption" });
+      URL.revokeObjectURL(url); save(); renderGrid();
+    };
+    img.src = url;
+  });
+  e.target.value = "";
+};
+
+/* ---- Letter ---- */
+$("open").onclick = () => {
+  const opening = $("lt").hidden;
+  $("lt").hidden = !opening; $("env").classList.toggle("open", opening);
+  $("open").setAttribute("aria-expanded", String(opening));
+  $("open").textContent = opening ? "close the letter" : "open the letter";
+  if (opening) setTimeout(() => $("lt").scrollIntoView({ behavior: "smooth", block: "start" }), 200);
+};
+</script>
 </body>
 </html>
